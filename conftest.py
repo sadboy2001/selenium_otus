@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 from selenium import webdriver
@@ -44,5 +46,5 @@ def driver(request):
         raise NotImplemented()
 
     yield browser
-
+    time.sleep(0.5)
     browser.close()
