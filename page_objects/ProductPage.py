@@ -1,0 +1,13 @@
+import time
+from selenium.webdriver.common.by import By
+
+from page_objects.BasePage import BasePage
+
+class ProductPage(BasePage):
+    CART = (By.CSS_SELECTOR, "#button-cart")
+
+    def add_to_cart(self):
+        time.sleep(1.5)
+        self.click(self.element(self.CART))
+        # self.driver.find_element(*self.CART).click()
+        time.sleep(1)
