@@ -18,6 +18,9 @@ class MainPage(BasePage):
     LOGIN = (By.LINK_TEXT, "Login")
 
     def click_featured_product(self, index):
+        # feature_product = self.elements(self.FEATURED_PRODUCT)[index]
+        # product_name = feature_product.find_element(*self.PRODUCT_NAME).text
+        # feature_product.click(self.element((By.CSS_SELECTOR, ".image")))
         feature_product = self.driver.find_elements(*self.FEATURED_PRODUCT)[index]
         product_name = feature_product.find_element(*self.PRODUCT_NAME).text
         feature_product.find_element(By.CSS_SELECTOR, ".image").click()

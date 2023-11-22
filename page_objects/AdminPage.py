@@ -12,7 +12,9 @@ class AdminPage(BasePage):
     PASSWORD_INPUT = (By.CSS_SELECTOR, "#input-password")
     LOGIN_BUTTON = (By.CSS_SELECTOR, "button")
     CATALOG = (By.CSS_SELECTOR, "#menu-catalog")
-    HEADER = (By.CSS_SELECTOR, "#content > div.page-header .container-fluid")
+    HEADER = (By.CSS_SELECTOR, "#content > div.page-header .float-end")
+    NEW_NAME = (By.CSS_SELECTOR, "#input-name-1")
+    NEW_META = (By.CSS_SELECTOR, "#input-meta-title-1")
 
 
     def login(self, username, password):
@@ -25,14 +27,16 @@ class AdminPage(BasePage):
         # self.driver.find_element(*self.LOGIN_BUTTON).click()
 
 
-    def new_product(self):
+    def new_product(self, name, meta):
         click_catalog = self.driver.find_element(*self.CATALOG)
         click_catalog.click()
-        time.sleep(1)
-        click_catalog.find_elements(By.TAG_NAME, "li")[1].click()
-        time.sleep(3)
-        self.driver.find_element(By.CSS_SELECTOR, "[data-original-title='Add New']").click()
-        get_header = self.driver.find_elements(*self.HEADER)[0]
         time.sleep(2)
-        get_header.click()
-        time.sleep(3)
+        click_catalog.find_elements(By.TAG_NAME, "li")[1].click()
+        get_header = self.driver.find_element(*self.HEADER)
+        get_header.find_elements(By.TAG_NAME, "a")[0].click()
+        self._input(self.element(self.NEW_NAME), name)
+        self._input(self.element(self.NEW_META), meta)
+        time.sleep(2)
+        get_header = self.driver.find_element(*self.HEADER)
+        get_header.find_elements(By.TAG_NAME, "button")[0].click()
+        time.sleep(2)

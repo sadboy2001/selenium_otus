@@ -14,9 +14,13 @@ class UserPage(BasePage):
     FORM_LOGIN = (By.ID, "form-login")
 
     def login(self, username, password):
-        self.driver.find_element(*self.FORM_LOGIN).find_element(*self.EMAIL_INPUT).send_keys(username)
-        self.driver.find_element(*self.FORM_LOGIN).find_element(*self.PASSWORD_INPUT).send_keys(password)
-        self.driver.find_element(*self.FORM_LOGIN).find_element(*self.LOGIN_BUTTON).click()
+        self._input(self.element_in_element(self.FORM_LOGIN, self.EMAIL_INPUT), username)
+        self._input(self.element_in_element(self.FORM_LOGIN, self.PASSWORD_INPUT), password)
+        self.click(self.element_in_element(self.FORM_LOGIN, self.LOGIN_BUTTON))
+
+        # self.driver.find_element(*self.FORM_LOGIN).find_element(*self.EMAIL_INPUT).send_keys(username)
+        # self.driver.find_element(*self.FORM_LOGIN).find_element(*self.PASSWORD_INPUT).send_keys(password)
+        # self.driver.find_element(*self.FORM_LOGIN).find_element(*self.LOGIN_BUTTON).click()
 
     def open_wish_list(self):
         self.driver.find_element(*self.WISH_LIST_LINK).click()

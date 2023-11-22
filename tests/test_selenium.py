@@ -100,4 +100,4 @@ def test_new_product(driver):
     driver.get("http:/localhost/administration/")
     AdminPage(driver).login("user", "bitnami")
     time.sleep(2)
-    AdminPage(driver).new_product()
+    AdminPage(driver).new_product("test", "test")
