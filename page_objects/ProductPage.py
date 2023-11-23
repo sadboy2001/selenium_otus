@@ -11,3 +11,6 @@ class ProductPage(BasePage):
         self.click(self.element(self.CART))
         # self.driver.find_element(*self.CART).click()
         time.sleep(1)
+
+    def product_info(self):
+        return self.driver.find_element(By.TAG_NAME, "h1").get_attribute("innerHTML")

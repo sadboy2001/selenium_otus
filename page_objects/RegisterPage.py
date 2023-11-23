@@ -14,8 +14,13 @@ class RegisterPage(BasePage):
 
 
     def register(self, first_name, last_name, email, password):
-        self.driver.find_element(*self.FIRST_NAME).send_keys(first_name)
-        self.driver.find_element(*self.LAST_NAME).send_keys(last_name)
-        self.driver.find_element(*self.EMAIL).send_keys(email)
-        self.driver.find_element(*self.PASSWORD).send_keys(password)
-        self.driver.find_element(*self.AGREE).click()
+        self._input(self.element(self.FIRST_NAME), first_name)
+        self._input(self.element(self.LAST_NAME), last_name)
+        self._input(self.element(self.EMAIL), email)
+        self._input(self.element(self.PASSWORD), password)
+        self.click(self.element(self.AGREE))
+        # self.driver.find_element(*self.FIRST_NAME).send_keys(first_name)
+        # self.driver.find_element(*self.LAST_NAME).send_keys(last_name)
+        # self.driver.find_element(*self.EMAIL).send_keys(email)
+        # self.driver.find_element(*self.PASSWORD).send_keys(password)
+        # self.driver.find_element(*self.AGREE).click()

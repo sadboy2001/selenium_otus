@@ -27,16 +27,16 @@ class AdminPage(BasePage):
         # self.driver.find_element(*self.LOGIN_BUTTON).click()
 
 
-    def new_product(self, name, meta):
+    def new_product(self):
         click_catalog = self.driver.find_element(*self.CATALOG)
         click_catalog.click()
         time.sleep(2)
         click_catalog.find_elements(By.TAG_NAME, "li")[1].click()
-        get_header = self.driver.find_element(*self.HEADER)
-        get_header.find_elements(By.TAG_NAME, "a")[0].click()
-        self._input(self.element(self.NEW_NAME), name)
-        self._input(self.element(self.NEW_META), meta)
-        time.sleep(2)
-        get_header = self.driver.find_element(*self.HEADER)
-        get_header.find_elements(By.TAG_NAME, "button")[0].click()
-        time.sleep(2)
+        # get_header = self.driver.find_element(*self.HEADER)
+        # get_header.find_elements(By.TAG_NAME, "a")[0].click()
+        # self._input(self.element(self.NEW_NAME), name)
+        # self._input(self.element(self.NEW_META), meta)
+        # time.sleep(2)
+        # get_header = self.driver.find_element(*self.HEADER)
+        # get_header.find_elements(By.TAG_NAME, "button")[0].click()
+        # time.sleep(2)

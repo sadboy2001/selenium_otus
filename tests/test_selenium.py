@@ -10,20 +10,23 @@ from page_objects.CartPage import CartPage
 from page_objects.AdminPage import AdminPage
 from page_objects.RegisterPage import RegisterPage
 from page_objects.elements.AlertElement import AlertElement
+from page_objects.AdminProductPage import AdminProductPage
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-def test_search_input(driver, base_url):
+def test_search_input(driver):
     # driver.get(base_url)
-    driver.find_element(By.NAME, "search").send_keys("test")
-    driver.find_element(By.CSS_SELECTOR, "#search button").click()
-    driver.find_element(value="content")
+    # driver.find_element(By.NAME, "search").send_keys("test")
+    # driver.find_element(By.CSS_SELECTOR, "#search button").click()
+    # driver.find_element(value="content")
+    MainPage(driver).click_search("test")
 
 def test_input(driver):
     # driver.get(base_url)
     MainPage(driver).click_carousel()
+    time.sleep(2)
     # product_name = MainPage(driver).click_featured_product(1)
-    assert driver.find_element(By.XPATH, "//h2[contains(text(),'Tablets')]").text == "Tablets"
+    assert ProductPage(driver).product_info() == "Samsung Galaxy Tab 10.1"
 
 
 def test_login_admin(driver):
@@ -97,7 +100,23 @@ def test_admin(driver):
 
 
 def test_new_product(driver):
+    # driver.get("http:/localhost/administration/")
+    # AdminPage(driver).login("user", "bitnami")
+    # time.sleep(2)
+    # AdminPage(driver).new_product("test", "test")
     driver.get("http:/localhost/administration/")
     AdminPage(driver).login("user", "bitnami")
     time.sleep(2)
-    AdminPage(driver).new_product("test", "test")
+    AdminPage(driver).new_product()
+    AdminProductPage(driver).add_product("testnew", "testnew")
+    AlertElement(driver)
+
+def test_delete_product(driver):
+    driver.get("http:/localhost/administration/")
+    AdminPage(driver).login("user", "bitnami")
+    time.sleep(2)
+    AdminPage(driver).new_product()
+    time.sleep(2)
+    AdminProductPage(driver).delete_last_added_product()
+    time.sleep(2)
+    Alert(driver).dismiss() # change to accept()
