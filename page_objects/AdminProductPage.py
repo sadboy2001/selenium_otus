@@ -1,13 +1,9 @@
-import time
-
-from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from page_objects.BasePage import BasePage
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.alert import Alert
 
 
 class AdminProductPage(BasePage):
@@ -26,11 +22,13 @@ class AdminProductPage(BasePage):
         self._input(self.element(self.NEW_META), meta)
         self.click(self.element(self.NEW_DATA))
         # self.driver.find_element(By.LINK_TEXT, "Data").click()
-        time.sleep(2)
+        # time.sleep(2)
+        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#input-model")))
         self.driver.find_element(By.CSS_SELECTOR, "#input-model").send_keys(meta)
         # self.driver.find_element(By.LINK_TEXT, "SEO").click()
         self.click(self.element(self.NEW_SEO))
-        time.sleep(2)
+        # time.sleep(2)
+        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#input-keyword-0-1")))
         self.driver.find_element(By.CSS_SELECTOR, "#input-keyword-0-1").send_keys(name)
         get_header = self.driver.find_element(*self.HEADER)
         get_header.find_elements(*self.BUTTON)[0].click()
@@ -40,11 +38,12 @@ class AdminProductPage(BasePage):
     def delete_last_added_product(self):
         self.driver.find_element(By.CSS_SELECTOR, "body").send_keys(Keys.CONTROL + Keys.END)
         self.driver.find_element(By.LINK_TEXT, ">|").click()
-        time.sleep(2)
+        # time.sleep(2)
+        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(self.CHOOSE_ELEMENT))
         tb = self.driver.find_element(*self.CHOOSE_ELEMENT)
         tr = tb.find_element(By.CSS_SELECTOR, "td > input")
         tr.click()
         get_header = self.driver.find_element(*self.HEADER)
         get_header.find_elements(By.TAG_NAME, "button")[2].click()
         # self.click(self.element_in_element(self.HEADER, self.BUTTON)[2])
-        time.sleep(1)
+        # time.sleep(1)

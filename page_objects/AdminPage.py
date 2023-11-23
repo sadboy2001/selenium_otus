@@ -15,6 +15,7 @@ class AdminPage(BasePage):
     HEADER = (By.CSS_SELECTOR, "#content > div.page-header .float-end")
     NEW_NAME = (By.CSS_SELECTOR, "#input-name-1")
     NEW_META = (By.CSS_SELECTOR, "#input-meta-title-1")
+    NAVIGATION = (By.CSS_SELECTOR, "#navigation")
 
 
     def login(self, username, password):
@@ -40,3 +41,6 @@ class AdminPage(BasePage):
         # get_header = self.driver.find_element(*self.HEADER)
         # get_header.find_elements(By.TAG_NAME, "button")[0].click()
         # time.sleep(2)
+
+    def load_page(self):
+        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(self.NAVIGATION))

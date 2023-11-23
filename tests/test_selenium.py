@@ -1,7 +1,4 @@
-import time
-
 from selenium.webdriver.common.alert import Alert
-from selenium.webdriver.common.by import By
 
 from page_objects.MainPage import MainPage
 from page_objects.UserPage import UserPage
@@ -11,8 +8,6 @@ from page_objects.AdminPage import AdminPage
 from page_objects.RegisterPage import RegisterPage
 from page_objects.elements.AlertElement import AlertElement
 from page_objects.AdminProductPage import AdminProductPage
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 def test_search_input(driver):
     # driver.get(base_url)
@@ -24,7 +19,7 @@ def test_search_input(driver):
 def test_input(driver):
     # driver.get(base_url)
     MainPage(driver).click_carousel()
-    time.sleep(2)
+    # time.sleep(2)
     # product_name = MainPage(driver).click_featured_product(1)
     assert ProductPage(driver).product_info() == "Samsung Galaxy Tab 10.1"
 
@@ -41,15 +36,13 @@ def test_login_admin(driver):
     # driver.find_element(By.CSS_SELECTOR, "#input-email").send_keys("test1@mail.ru")
     # driver.find_element(By.CSS_SELECTOR, "#input-password").send_keys("test1")
     # driver.find_element(By.NAME, "agree").click()
-    driver.find_element(By.XPATH, "//button[contains(text(),'Continue')]").click()
+    # driver.find_element(By.XPATH, "//button[contains(text(),'Continue')]").click()
 
 def test_money(driver):
     # driver.get(base_url)
     # old_money = driver.find_element(By.TAG_NAME, "strong").text
     old_money = MainPage(driver).current_money()
-    time.sleep(2)
     MainPage(driver).click_money(1)
-    time.sleep(2)
     assert old_money != MainPage(driver).current_money()
     # driver.find_element(By.XPATH, "//body/nav[@id='top']/div[1]/div[1]/ul[1]/li[1]/form[1]/div[1]/a[1]").click()
     # driver.find_element(By.LINK_TEXT, "€ Euro").click()
@@ -82,7 +75,8 @@ def test_add_to_cart(driver):
     CartPage(driver).click_checkout()
     # WebDriverWait(driver, 6).until(EC.visibility_of_element_located((By.LINK_TEXT, product_name)))
     # driver.find_element(By.LINK_TEXT, "Checkout").click()
-    driver.find_element(By.CSS_SELECTOR, "#form-register").find_element(By.CSS_SELECTOR, "a").click()
+    CartPage(driver).go_to_logging()
+    # driver.find_element(By.CSS_SELECTOR, "#form-register").find_element(By.CSS_SELECTOR, "a").click()
     UserPage(driver).login("test1@mail.ru", "test1")
     # form_login = driver.find_element(By.ID, "form-login")
     # form_login.find_element(By.CSS_SELECTOR, "#input-email").send_keys("test1@mail.ru")
@@ -106,7 +100,7 @@ def test_new_product(driver):
     # AdminPage(driver).new_product("test", "test")
     driver.get("http:/localhost/administration/")
     AdminPage(driver).login("user", "bitnami")
-    time.sleep(2)
+    AdminPage(driver).load_page()
     AdminPage(driver).new_product()
     AdminProductPage(driver).add_product("testnew", "testnew")
     AlertElement(driver)
@@ -114,9 +108,7 @@ def test_new_product(driver):
 def test_delete_product(driver):
     driver.get("http:/localhost/administration/")
     AdminPage(driver).login("user", "bitnami")
-    time.sleep(2)
+    AdminPage(driver).load_page()
     AdminPage(driver).new_product()
-    time.sleep(2)
     AdminProductPage(driver).delete_last_added_product()
-    time.sleep(2)
     Alert(driver).dismiss() # change to accept()
