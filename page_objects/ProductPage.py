@@ -9,7 +9,6 @@ class ProductPage(BasePage):
     def add_to_cart(self):
         time.sleep(1.5)
         self.click(self.element(self.CART))
-        # self.driver.find_element(*self.CART).click()
         time.sleep(1)
 
     def product_info(self):

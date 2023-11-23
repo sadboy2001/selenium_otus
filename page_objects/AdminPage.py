@@ -23,9 +23,6 @@ class AdminPage(BasePage):
         self._input(self.element(self.PASSWORD_INPUT), password)
         self.click(self.element(self.LOGIN_BUTTON))
         return self
-        # self.driver.find_element(*self.EMAIL_INPUT).send_keys(username)
-        # self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
-        # self.driver.find_element(*self.LOGIN_BUTTON).click()
 
 
     def new_product(self):
@@ -33,14 +30,6 @@ class AdminPage(BasePage):
         click_catalog.click()
         time.sleep(2)
         click_catalog.find_elements(By.TAG_NAME, "li")[1].click()
-        # get_header = self.driver.find_element(*self.HEADER)
-        # get_header.find_elements(By.TAG_NAME, "a")[0].click()
-        # self._input(self.element(self.NEW_NAME), name)
-        # self._input(self.element(self.NEW_META), meta)
-        # time.sleep(2)
-        # get_header = self.driver.find_element(*self.HEADER)
-        # get_header.find_elements(By.TAG_NAME, "button")[0].click()
-        # time.sleep(2)
 
     def load_page(self):
         WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(self.NAVIGATION))
