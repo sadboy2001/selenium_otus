@@ -1,4 +1,0 @@
-[32mINFO    [0m test_input:conftest.py:46 ===> Test test_input started at 2023-11-24 15:43:54.005722
-[32mINFO    [0m test_input:conftest.py:73 Browser <selenium.webdriver.chrome.webdriver.WebDriver (session="a0d5052b1217fcd0b25db417a950f917")> started
-[32mINFO    [0m test_input:MainPage.py:33 Click on image in Main page
-[32mINFO    [0m test_input:conftest.py:79 ===> Test test_input finished at 2023-11-24 15:43:56.987224

@@ -1,1 +1,0 @@
-[32mINFO    [0m test_add_to_cart:conftest.py:45 ===> Test test_add_to_cart started at 2023-11-24 14:33:40.554282

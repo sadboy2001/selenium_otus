@@ -1,5 +1,0 @@
-[32mINFO    [0m test_search_input:conftest.py:46 ===> Test test_search_input started at 2023-11-24 15:43:49.381842
-[32mINFO    [0m test_search_input:conftest.py:73 Browser <selenium.webdriver.chrome.webdriver.WebDriver (session="86e4be2e60647a53f636f4a4dc82a576")> started
-[32mINFO    [0m test_search_input:MainPage.py:19 Input text on 'SEARCH_FIELD'
-[32mINFO    [0m test_search_input:MainPage.py:21 Click 'SEARCH'
-[32mINFO    [0m test_search_input:conftest.py:79 ===> Test test_search_input finished at 2023-11-24 15:43:53.979100
