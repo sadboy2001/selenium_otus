@@ -1,8 +1,0 @@
-[32mINFO    [0m test_add_to_cart:conftest.py:46 ===> Test test_add_to_cart started at 2023-11-24 14:40:48.029612
-[32mINFO    [0m test_add_to_cart:conftest.py:73 Browser <selenium.webdriver.chrome.webdriver.WebDriver (session="3e44ce0edcdddde3abe5cb031772332c")> started
-[32mINFO    [0m test_add_to_cart:MainPage.py:29 Click on image product
-[32mINFO    [0m test_add_to_cart:ProductPage.py:11 Click 'ADD TO CART'
-[32mINFO    [0m test_add_to_cart:CartPage.py:11 Click 'CHECKOUT'
-[32mINFO    [0m test_add_to_cart:CartPage.py:15 Click 'LOGIN'
-[32mINFO    [0m test_add_to_cart:UserPage.py:17 Click 'LOGIN'
-[32mINFO    [0m test_add_to_cart:conftest.py:79 ===> Test test_add_to_cart finished at 2023-11-24 14:40:57.675004

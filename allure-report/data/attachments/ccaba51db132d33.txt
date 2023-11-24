@@ -1,1 +1,0 @@
-[32mINFO    [0m test_new_product:conftest.py:45 ===> Test test_new_product started at 2023-11-24 14:33:44.977851

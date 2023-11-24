@@ -1,1 +1,0 @@
-[32mINFO    [0m test_value:conftest.py:45 ===> Test test_value started at 2023-11-24 14:33:38.447883

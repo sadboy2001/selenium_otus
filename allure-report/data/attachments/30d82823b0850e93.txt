@@ -1,1 +1,0 @@
-[32mINFO    [0m test_delete_product:conftest.py:45 ===> Test test_delete_product started at 2023-11-24 14:33:47.440973
