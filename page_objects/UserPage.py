@@ -14,4 +14,5 @@ class UserPage(BasePage):
     def login(self, username, password):
         self._input(self.element_in_element(self.FORM_LOGIN, self.EMAIL_INPUT), username)
         self._input(self.element_in_element(self.FORM_LOGIN, self.PASSWORD_INPUT), password)
+        self.logger.info("Click 'LOGIN'")
         self.click(self.element_in_element(self.FORM_LOGIN, self.LOGIN_BUTTON))

@@ -19,17 +19,23 @@ class AdminPage(BasePage):
 
 
     def login(self, username, password):
-        self._input(self.element(self.EMAIL_INPUT), username)
+        self.logger.info("Input 'USERNAME'")
+        self._input(self.element(self.NAVIGATION), username)
+        # EMAIL_INPUT
+        self.logger.info("Input 'PASSWORD'")
         self._input(self.element(self.PASSWORD_INPUT), password)
+        self.logger.info("Click 'LOGIN_BUTTON'")
         self.click(self.element(self.LOGIN_BUTTON))
         return self
 
 
     def new_product(self):
+        self.logger.info("Click 'CATALOG'")
         click_catalog = self.driver.find_element(*self.CATALOG)
         click_catalog.click()
         time.sleep(2)
         click_catalog.find_elements(By.TAG_NAME, "li")[1].click()
 
     def load_page(self):
+        self.logger.info("Wait 'PAGE'")
         WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(self.NAVIGATION))

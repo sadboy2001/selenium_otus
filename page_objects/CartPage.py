@@ -8,7 +8,9 @@ class CartPage(BasePage):
     LOGIN_HREF = (By.CSS_SELECTOR, "a")
 
     def click_checkout(self):
+        self.logger.info("Click 'CHECKOUT'")
         self.click(self.element(self.CHECKOUT_LINK))
 
     def go_to_logging(self):
+        self.logger.info("Click 'LOGIN'")
         self.click(self.element_in_element(self.FORM_REGISTER, self.LOGIN_HREF))

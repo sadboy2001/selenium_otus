@@ -17,5 +17,7 @@ class RegisterPage(BasePage):
         self._input(self.element(self.LAST_NAME), last_name)
         self._input(self.element(self.EMAIL), email)
         self._input(self.element(self.PASSWORD), password)
+        self.logger.info("Click 'AGREE'")
         self.click(self.element(self.AGREE))
+        self.logger.info("Click 'CONTINUE'")
         self.click(self.element(self.CONTINUE_BUTTON))

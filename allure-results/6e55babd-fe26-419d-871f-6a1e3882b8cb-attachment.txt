@@ -1,0 +1,4 @@
+[32mINFO    [0m test_delete_product:conftest.py:46 ===> Test test_delete_product started at 2023-11-24 15:44:41.694184
+[32mINFO    [0m test_delete_product:conftest.py:73 Browser <selenium.webdriver.chrome.webdriver.WebDriver (session="0b1b200c69989b0580c4098414a8bbc7")> started
+[32mINFO    [0m test_delete_product:AdminPage.py:22 Input 'USERNAME'
+[32mINFO    [0m test_delete_product:conftest.py:79 ===> Test test_delete_product finished at 2023-11-24 15:44:48.204968

@@ -8,6 +8,7 @@ class ProductPage(BasePage):
 
     def add_to_cart(self):
         time.sleep(1.5)
+        self.logger.info("Click 'ADD TO CART'")
         self.click(self.element(self.CART))
         time.sleep(1)
 

@@ -1,0 +1,1 @@
+[32mINFO    [0m test_admin:conftest.py:45 ===> Test test_admin started at 2023-11-24 14:33:42.724388

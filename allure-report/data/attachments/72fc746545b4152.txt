@@ -1,0 +1,5 @@
+[32mINFO    [0m test_value:conftest.py:46 ===> Test test_value started at 2023-11-24 15:44:07.613664
+[32mINFO    [0m test_value:conftest.py:73 Browser <selenium.webdriver.chrome.webdriver.WebDriver (session="145e4f90ac2cc08d2b34c1700abe1186")> started
+[32mINFO    [0m test_value:MainPage.py:43 Click 'MENU'
+[32mINFO    [0m test_value:MainPage.py:46 Choose element
+[32mINFO    [0m test_value:conftest.py:79 ===> Test test_value finished at 2023-11-24 15:44:10.403905

@@ -1,6 +1,10 @@
 import time
+import datetime
 
 import pytest
+import logging
+import allure
+import json
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -17,6 +21,10 @@ def pytest_addoption(parser):
     parser.addoption(
         "--base_url", default='http:/localhost'
     )
+    parser.addoption(
+        "--log_level", action="store", default="INFO"
+    )
+
 
 # @pytest.fixture()
 # def base_url(request):
@@ -27,6 +35,15 @@ def driver(request):
     base_url = request.config.getoption("--base_url")
     browser_name = request.config.getoption("--browser")
     headless = request.config.getoption("--headless")
+    log_level = request.config.getoption("--log_level")
+
+    logger = logging.getLogger(request.node.name)
+    file_handler = logging.FileHandler(f"logs/{request.node.name}.log")
+    file_handler.setFormatter(logging.Formatter('%(levelname)s %(message)s'))
+    logger.addHandler(file_handler)
+    logger.setLevel(level=log_level)
+
+    logger.info("===> Test %s started at %s" % (request.node.name, datetime.datetime.now()))
 
     service = Service()
 
@@ -44,9 +61,22 @@ def driver(request):
     else:
         raise NotImplemented()
 
+    allure.attach(
+        name=browser.session_id,
+        body=json.dumps(browser.capabilities),
+        attachment_type=allure.attachment_type.JSON)
+
+    browser.log_level = log_level
+    browser.logger = logger
+    browser.test_name = request.node.name
+
+    logger.info("Browser %s started" % browser)
     browser.maximize_window()
     browser.get(base_url)
 
-    yield browser
+    def fin():
+        browser.quit()
+        logger.info("===> Test %s finished at %s" % (request.node.name, datetime.datetime.now()))
 
-    browser.close()
+    request.addfinalizer(fin)
+    return browser

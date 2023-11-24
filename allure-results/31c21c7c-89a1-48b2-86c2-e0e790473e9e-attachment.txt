@@ -1,0 +1,4 @@
+[32mINFO    [0m test_admin:conftest.py:46 ===> Test test_admin started at 2023-11-24 15:44:20.640428
+[32mINFO    [0m test_admin:conftest.py:73 Browser <selenium.webdriver.chrome.webdriver.WebDriver (session="332e8e664aaa15db8fd62ceef07b4202")> started
+[32mINFO    [0m test_admin:AdminPage.py:22 Input 'USERNAME'
+[32mINFO    [0m test_admin:conftest.py:79 ===> Test test_admin finished at 2023-11-24 15:44:35.341329
