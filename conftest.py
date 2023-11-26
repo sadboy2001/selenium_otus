@@ -6,7 +6,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from webdriver_manager.firefox import GeckoDriverManager
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -16,15 +15,16 @@ def pytest_addoption(parser):
         "--headless", action='store_true'
     )
     parser.addoption(
-        "--base_url", required=True
+        "--base_url", default='http:/localhost'
     )
 
-@pytest.fixture()
-def base_url(request):
-    return request.config.getoption("--base_url")
+# @pytest.fixture()
+# def base_url(request):
+#     return request.config.getoption("--base_url")
 
 @pytest.fixture()
 def driver(request):
+    base_url = request.config.getoption("--base_url")
     browser_name = request.config.getoption("--browser")
     headless = request.config.getoption("--headless")
 
@@ -38,13 +38,15 @@ def driver(request):
         options = Options()
         options.headless = headless
     elif browser_name == "firefox":
-        browser = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
-        options = webdriver.FirefoxOptions()
-        options.headless = headless
+        options = FirefoxOptions()
         browser = webdriver.Firefox(service=service, options=options)
+        options.headless = headless
     else:
         raise NotImplemented()
 
+    browser.maximize_window()
+    browser.get(base_url)
+
     yield browser
-    time.sleep(0.5)
+
     browser.close()
