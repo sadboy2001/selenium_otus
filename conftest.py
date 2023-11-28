@@ -19,8 +19,11 @@ def pytest_addoption(parser):
         "--headless", action='store_true'
     )
     parser.addoption(
-        "--base_url", default='http:/localhost'
+        "--executor", action="store", default="127.0.0.1"
     )
+    # parser.addoption(
+    #     "--base_url", default='http:/localhost'
+    # )
     parser.addoption(
         "--log_level", action="store", default="INFO"
     )
@@ -32,7 +35,8 @@ def pytest_addoption(parser):
 
 @pytest.fixture()
 def driver(request):
-    base_url = request.config.getoption("--base_url")
+    executor = request.config.getoption("--executor")
+    # base_url = request.config.getoption("--base_url")
     browser_name = request.config.getoption("--browser")
     headless = request.config.getoption("--headless")
     log_level = request.config.getoption("--log_level")
@@ -45,22 +49,26 @@ def driver(request):
 
     logger.info("===> Test %s started at %s" % (request.node.name, datetime.datetime.now()))
 
-    service = Service()
+    executor_url = f"http://{executor}:4444/wd/hub"
+    # service = Service()
 
     if browser_name == "chrome":
         options = Options()
         if headless:
             options.add_argument("headless=new")
-        browser = webdriver.Chrome(service=service, options=options)
+        # browser = webdriver.Chrome(service=service, options=options)
         options = Options()
         options.headless = headless
     elif browser_name == "firefox":
         options = FirefoxOptions()
-        browser = webdriver.Firefox(service=service, options=options)
+        # browser = webdriver.Firefox(service=service, options=options)
         options.headless = headless
     else:
         raise NotImplemented()
-
+    browser = webdriver.Remote(
+        command_executor=executor_url,
+        options=options
+    )
     allure.attach(
         name=browser.session_id,
         body=json.dumps(browser.capabilities),
@@ -71,8 +79,9 @@ def driver(request):
     browser.test_name = request.node.name
 
     logger.info("Browser %s started" % browser)
+
     browser.maximize_window()
-    browser.get(base_url)
+    # browser.get(base_url)
 
     def fin():
         browser.quit()
