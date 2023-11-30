@@ -1,4 +1,3 @@
-import time
 import datetime
 
 import pytest
@@ -7,31 +6,26 @@ import allure
 import json
 
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+
+# from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
+
 def pytest_addoption(parser):
-    parser.addoption(
-        "--browser", default="chrome", choices=["chrome", "firefox"]
-    )
-    parser.addoption(
-        "--headless", action='store_true'
-    )
-    parser.addoption(
-        "--executor", action="store", default="127.0.0.1"
-    )
+    parser.addoption("--browser", default="chrome", choices=["chrome", "firefox"])
+    parser.addoption("--headless", action="store_true")
+    parser.addoption("--executor", action="store", default="127.0.0.1")
     # parser.addoption(
     #     "--base_url", default='http:/localhost'
     # )
-    parser.addoption(
-        "--log_level", action="store", default="INFO"
-    )
+    parser.addoption("--log_level", action="store", default="INFO")
 
 
 # @pytest.fixture()
 # def base_url(request):
 #     return request.config.getoption("--base_url")
+
 
 @pytest.fixture()
 def driver(request):
@@ -43,11 +37,13 @@ def driver(request):
 
     logger = logging.getLogger(request.node.name)
     file_handler = logging.FileHandler(f"logs/{request.node.name}.log")
-    file_handler.setFormatter(logging.Formatter('%(levelname)s %(message)s'))
+    file_handler.setFormatter(logging.Formatter("%(levelname)s %(message)s"))
     logger.addHandler(file_handler)
     logger.setLevel(level=log_level)
 
-    logger.info("===> Test %s started at %s" % (request.node.name, datetime.datetime.now()))
+    logger.info(
+        "===> Test %s started at %s" % (request.node.name, datetime.datetime.now())
+    )
 
     executor_url = f"http://{executor}:4444/wd/hub"
     # service = Service()
@@ -65,14 +61,12 @@ def driver(request):
         options.headless = headless
     else:
         raise NotImplemented()
-    browser = webdriver.Remote(
-        command_executor=executor_url,
-        options=options
-    )
+    browser = webdriver.Remote(command_executor=executor_url, options=options)
     allure.attach(
         name=browser.session_id,
         body=json.dumps(browser.capabilities),
-        attachment_type=allure.attachment_type.JSON)
+        attachment_type=allure.attachment_type.JSON,
+    )
 
     browser.log_level = log_level
     browser.logger = logger
@@ -85,7 +79,9 @@ def driver(request):
 
     def fin():
         browser.quit()
-        logger.info("===> Test %s finished at %s" % (request.node.name, datetime.datetime.now()))
+        logger.info(
+            "===> Test %s finished at %s" % (request.node.name, datetime.datetime.now())
+        )
 
     request.addfinalizer(fin)
     return browser

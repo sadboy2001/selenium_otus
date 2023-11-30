@@ -17,7 +17,6 @@ class AdminPage(BasePage):
     NEW_META = (By.CSS_SELECTOR, "#input-meta-title-1")
     NAVIGATION = (By.CSS_SELECTOR, "#navigation")
 
-
     def login(self, username, password):
         self.logger.info("Input 'USERNAME'")
         self._input(self.element(self.NAVIGATION), username)
@@ -28,7 +27,6 @@ class AdminPage(BasePage):
         self.click(self.element(self.LOGIN_BUTTON))
         return self
 
-
     def new_product(self):
         self.logger.info("Click 'CATALOG'")
         click_catalog = self.driver.find_element(*self.CATALOG)
@@ -38,4 +36,6 @@ class AdminPage(BasePage):
 
     def load_page(self):
         self.logger.info("Wait 'PAGE'")
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(self.NAVIGATION))
+        WebDriverWait(self.driver, 5).until(
+            EC.visibility_of_element_located(self.NAVIGATION)
+        )

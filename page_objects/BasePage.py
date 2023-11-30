@@ -22,20 +22,21 @@ class BasePage:
 
     @allure.step
     def _input(self, element, value):
-        self.logger.debug("%s: Input %s in input %s" % (self.class_name, value, element))
+        self.logger.debug(
+            "%s: Input %s in input %s" % (self.class_name, value, element)
+        )
         self.click(element)
         element.clear()
         element.send_keys(value)
 
     def element(self, locator: tuple):
         try:
-            self.logger.debug("%s: Check if element %s is present" % (self.class_name, str(locator)))
+            self.logger.debug(
+                "%s: Check if element %s is present" % (self.class_name, str(locator))
+            )
             return self.wait.until(EC.visibility_of_element_located(locator))
         except TimeoutException:
-            allure.attach(
-                name="screenshot",
-                body=self.driver.get_screenshot_as_png()
-            )
+            allure.attach(name="screenshot", body=self.driver.get_screenshot_as_png())
             raise AssertionError(f"No element in vision {locator}")
 
     def element_in_element(self, parent_locator: tuple, child_locator: tuple):
@@ -43,7 +44,9 @@ class BasePage:
 
     def elements(self, locator: tuple):
         try:
-            self.logger.debug("%s: Check if elements %s is present" % (self.class_name, str(locator)))
+            self.logger.debug(
+                "%s: Check if elements %s is present" % (self.class_name, str(locator))
+            )
             return self.wait.until(EC.visibility_of_all_elements_located(locator))
         except TimeoutException:
             raise AssertionError(f"No element in vision {locator}")

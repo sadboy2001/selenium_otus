@@ -34,9 +34,12 @@ class MainPage(BasePage):
         self.driver.find_element(*self.CAROUSEL_ITEM).click()
 
     def current_money(self):
-        money = self.driver.find_element(*self.HEADER).find_element(By.TAG_NAME, "strong").text
+        money = (
+            self.driver.find_element(*self.HEADER)
+            .find_element(By.TAG_NAME, "strong")
+            .text
+        )
         return money
-
 
     def click_money(self, index):
         form_currency = self.driver.find_element(By.CSS_SELECTOR, "#form-currency")
@@ -46,9 +49,10 @@ class MainPage(BasePage):
         self.logger.info("Choose element")
         temp_money.click()
 
-
     def navigation(self, index):
-        form_nav = self.driver.find_element(By.CSS_SELECTOR, "#top > div.container .nav.float-end")
+        form_nav = self.driver.find_element(
+            By.CSS_SELECTOR, "#top > div.container .nav.float-end"
+        )
         temp_money = form_nav.find_elements(By.TAG_NAME, "li")[index]
         temp_money.click()
 
@@ -61,4 +65,3 @@ class MainPage(BasePage):
     def check_description(self, index):
         feature_product = self.driver.find_elements(*self.FEATURED_PRODUCT)[index]
         return feature_product.find_element(*self.PRODUCT_PRICE).text
-

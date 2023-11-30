@@ -11,7 +11,6 @@ class RegisterPage(BasePage):
     AGREE = (By.NAME, "agree")
     CONTINUE_BUTTON = (By.CSS_SELECTOR, "#form-register > div.text-end button")
 
-
     def register(self, first_name, last_name, email, password):
         self._input(self.element(self.FIRST_NAME), first_name)
         self._input(self.element(self.LAST_NAME), last_name)
