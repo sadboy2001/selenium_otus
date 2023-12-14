@@ -17,24 +17,39 @@ class AdminProductPage(BasePage):
 
     def add_product(self, name, meta):
         get_header = self.driver.find_element(*self.HEADER)
+        self.logger.info("Click button 'ADD NEW'")
         get_header.find_elements(By.TAG_NAME, "a")[0].click()
         self._input(self.element(self.NEW_NAME), name)
         self._input(self.element(self.NEW_META), meta)
+        self.logger.info("Click 'NEW DATA' in menu")
         self.click(self.element(self.NEW_DATA))
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#input-model")))
+        WebDriverWait(self.driver, 5).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, "#input-model"))
+        )
         self.driver.find_element(By.CSS_SELECTOR, "#input-model").send_keys(meta)
+        self.logger.info("Click 'NEW SEO' in menu")
         self.click(self.element(self.NEW_SEO))
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#input-keyword-0-1")))
+        WebDriverWait(self.driver, 5).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, "#input-keyword-0-1"))
+        )
         self.driver.find_element(By.CSS_SELECTOR, "#input-keyword-0-1").send_keys(name)
         get_header = self.driver.find_element(*self.HEADER)
+        self.logger.info("Click 'SAVE'")
         get_header.find_elements(*self.BUTTON)[0].click()
 
     def delete_last_added_product(self):
-        self.driver.find_element(By.CSS_SELECTOR, "body").send_keys(Keys.CONTROL + Keys.END)
+        self.driver.find_element(By.CSS_SELECTOR, "body").send_keys(
+            Keys.CONTROL + Keys.END
+        )
+        self.logger.info("Click 'LAST PAGE'")
         self.driver.find_element(By.LINK_TEXT, ">|").click()
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(self.CHOOSE_ELEMENT))
+        WebDriverWait(self.driver, 5).until(
+            EC.visibility_of_element_located(self.CHOOSE_ELEMENT)
+        )
         tb = self.driver.find_element(*self.CHOOSE_ELEMENT)
         tr = tb.find_element(By.CSS_SELECTOR, "td > input")
+        self.logger.info("Click 'CHOOSE' in tab")
         tr.click()
         get_header = self.driver.find_element(*self.HEADER)
+        self.logger.info("Click 'CONFIRM'")
         get_header.find_elements(By.TAG_NAME, "button")[2].click()
