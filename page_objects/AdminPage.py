@@ -20,7 +20,7 @@ class AdminPage(BasePage):
 
     def login(self, username, password):
         self.logger.info("Input 'USERNAME'")
-        self._input(self.element(self.NAVIGATION), username)
+        self._input(self.element(self.EMAIL_INPUT), username)
         # EMAIL_INPUT
         self.logger.info("Input 'PASSWORD'")
         self._input(self.element(self.PASSWORD_INPUT), password)

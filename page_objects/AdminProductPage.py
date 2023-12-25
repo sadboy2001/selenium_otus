@@ -28,7 +28,7 @@ class AdminProductPage(BasePage):
         self.logger.info("Click 'NEW SEO' in menu")
         self.click(self.element(self.NEW_SEO))
         WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#input-keyword-0-1")))
-        self.driver.find_element(By.CSS_SELECTOR, "#input-keyword-0-1").send_keys(name)
+        self.driver.find_element(By.CSS_SELECTOR, "#input-keyword-0-1").send_keys(name+"qwe")
         get_header = self.driver.find_element(*self.HEADER)
         self.logger.info("Click 'SAVE'")
         get_header.find_elements(*self.BUTTON)[0].click()

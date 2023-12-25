@@ -14,6 +14,8 @@ class MainPage(BasePage):
     LOGIN = (By.LINK_TEXT, "Login")
     SEARCH_BUTTON = (By.CSS_SELECTOR, "#search button")
     SEARCH_FIELD = (By.CSS_SELECTOR, "[name=search]")
+    BOTTOM_MENU = (By.LINK_TEXT, "Brands")
+    APPLE_BRAND = (By.LINK_TEXT, "Apple")
 
     def click_search(self, text):
         self.logger.info("Input text on 'SEARCH_FIELD'")
@@ -21,6 +23,10 @@ class MainPage(BasePage):
         self.logger.info("Click 'SEARCH'")
         self.click(self.element(self.SEARCH_BUTTON))
         self.driver.find_element(value="content")
+
+    def check_bottom(self):
+        self.click(self.element(self.BOTTOM_MENU))
+        self.click(self.element(self.APPLE_BRAND))
 
     def click_featured_product(self, index):
         feature_product = self.driver.find_elements(*self.FEATURED_PRODUCT)[index]

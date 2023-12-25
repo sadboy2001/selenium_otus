@@ -1,0 +1,15 @@
+FROM python:3.10-alpine
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+ENV BASE_URL=http://localhost
+ENV BROWSER=chrome
+
+RUN pip install -U pip
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD ["python3", "-m", "pytest", "--base_url=$BASE_URL", "--browser=$BROWSER"]

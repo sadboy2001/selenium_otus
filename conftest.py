@@ -24,6 +24,10 @@ def pytest_addoption(parser):
     parser.addoption(
         "--log_level", action="store", default="INFO"
     )
+    parser.addoption(
+        "--url_api", default="https://jsonplaceholder.typicode.com",
+        help="JSONplaceholder API Endpoint"
+    )
 
 
 # @pytest.fixture()
@@ -80,3 +84,6 @@ def driver(request):
 
     request.addfinalizer(fin)
     return browser
+
+
+
