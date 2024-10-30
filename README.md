@@ -27,7 +27,7 @@
 1. **Клонируйте репозиторий**
 
    ```bash
-   git clone <URL_вашего_репозитория>
+   git clone https://github.com/sadboy2001/selenium_otus.git
    cd selenium_otus
 2. **Убедитесь, что все зависимости указаны в requirements.txt**
    ```bash
@@ -54,6 +54,7 @@
 5. **Остановка контейнеров**
 
 Чтобы остановить запущенные контейнеры, используйте:
+    
     ```bash
     docker-compose down
 
